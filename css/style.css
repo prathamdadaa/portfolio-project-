@@ -1,0 +1,772 @@
+/* ============================================================
+   Captain's Trade Co. — Portfolio Website
+   FILE: css/style.css
+   STRUCTURE:
+     1. CSS Variables (Design Tokens)
+     2. Reset & Base
+     3. Navigation
+     4. Hero Section
+     5. Buttons
+     6. Stats Bar
+     7. Section Shared Styles
+     8. Divider
+     9. Services Section
+    10. Trade Routes (Portfolio)
+    11. About Section
+    12. Contact Section
+    13. Footer
+    14. Scroll Reveal Animation
+    15. Responsive / Media Queries
+============================================================ */
+
+
+/* ── 1. CSS VARIABLES (Design Tokens) ── */
+:root {
+  /* Colors */
+  --navy:        #0d1b2a;
+  --deep:        #0a1520;
+  --gold:        #c9943a;
+  --gold-lt:     #e8c06a;
+  --cream:       #f0e8d5;
+  --parchment:   #e8dcc0;
+  --rust:        #8b3a1a;
+  --blue:        #2d5f8a;
+  --blue-lt:     #3e7db5;
+  --mist:        rgba(201, 148, 58, 0.12);
+
+  /* Typography */
+  --font-display:  'Cinzel Decorative', serif;
+  --font-heading:  'Cinzel', serif;
+  --font-body:     'Lato', sans-serif;
+}
+
+
+/* ── 2. RESET & BASE ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--deep);
+  color: var(--cream);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+
+/* ── 3. NAVIGATION ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 6%;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 21, 32, 0.97) 0%,
+    rgba(10, 21, 32, 0) 100%
+  );
+  backdrop-filter: blur(4px);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(240, 232, 213, 0.75);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+
+/* ── 4. HERO SECTION ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Blueprint grid background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #0f1e2e;
+  background-image:
+    linear-gradient(rgba(45, 95, 138, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 95, 138, 0.18) 1px, transparent 1px),
+    radial-gradient(ellipse 60% 70% at 70% 50%, rgba(201, 148, 58, 0.08) 0%, transparent 70%);
+  background-size: 50px 50px, 50px 50px, 100% 100%;
+  z-index: 0;
+}
+
+/* Compass rose SVG (decorative overlay) */
+.compass-rose {
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 620px;
+  height: 620px;
+  opacity: 0.07;
+  z-index: 1;
+}
+
+/* Pirate character art */
+.hero-art {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  max-width: 55%;
+  object-fit: contain;
+  object-position: right bottom;
+  z-index: 2;
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.85) 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.85) 55%, transparent 100%);
+  filter: sepia(20%) contrast(1.05);
+}
+
+/* Text content block */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  padding: 80px 8%;
+  max-width: 650px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-eyebrow::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 10px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+}
+
+.hero-title span {
+  color: var(--gold);
+}
+
+.hero-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--gold-lt);
+  margin-bottom: 28px;
+  letter-spacing: 0.06em;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(240, 232, 213, 0.82);
+  max-width: 480px;
+  margin-bottom: 44px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+
+/* ── 5. BUTTONS ── */
+.btn-primary {
+  display: inline-block;
+  padding: 14px 34px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: background 0.25s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--gold-lt);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 13px 32px;
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(201, 148, 58, 0.55);
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, transform 0.2s;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold-lt);
+  transform: translateY(-2px);
+}
+
+
+/* ── 6. STATS BAR ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 0 8%;
+  background: rgba(201, 148, 58, 0.15);
+  border-top: 1px solid rgba(201, 148, 58, 0.25);
+  border-bottom: 1px solid rgba(201, 148, 58, 0.25);
+}
+
+.stat-item {
+  padding: 36px 28px;
+  text-align: center;
+  background: rgba(13, 27, 42, 0.85);
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--gold);
+  display: block;
+}
+
+.stat-lbl {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240, 232, 213, 0.55);
+  margin-top: 6px;
+  font-family: var(--font-heading);
+}
+
+
+/* ── 7. SECTION SHARED STYLES ── */
+section {
+  padding: 90px 8%;
+  position: relative;
+}
+
+.section-label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  opacity: 0.8;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  color: var(--cream);
+  margin-bottom: 18px;
+  line-height: 1.2;
+}
+
+.section-title span {
+  color: var(--gold);
+}
+
+.section-lead {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(240, 232, 213, 0.72);
+  max-width: 620px;
+  margin-bottom: 56px;
+}
+
+
+/* ── 8. DIVIDER ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0 8%;
+  opacity: 0.35;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+.divider-icon {
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+
+
+/* ── 9. SERVICES SECTION ── */
+.services-bg {
+  background: linear-gradient(180deg, var(--deep) 0%, #0c1a28 100%);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  background: rgba(13, 27, 42, 0.7);
+  border: 1px solid rgba(201, 148, 58, 0.18);
+  padding: 40px 32px;
+  position: relative;
+  transition: border-color 0.3s, transform 0.3s;
+  overflow: hidden;
+}
+
+/* Gold top-line on hover */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.service-card:hover {
+  border-color: rgba(201, 148, 58, 0.5);
+  transform: translateY(-5px);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-icon {
+  font-size: 2.2rem;
+  margin-bottom: 22px;
+  display: block;
+}
+
+.service-name {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-lt);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.service-desc {
+  font-size: 0.93rem;
+  line-height: 1.72;
+  color: rgba(240, 232, 213, 0.65);
+}
+
+
+/* ── 10. TRADE ROUTES (PORTFOLIO) ── */
+.routes-section {
+  background: var(--deep);
+}
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.route-card {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  border: 1px solid rgba(201, 148, 58, 0.2);
+  display: flex;
+  align-items: flex-end;
+  padding: 28px;
+  background: rgba(13, 27, 42, 0.8);
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.route-card:hover {
+  border-color: rgba(201, 148, 58, 0.55);
+}
+
+/* Dark gradient overlay */
+.route-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 21, 32, 0.9) 0%, transparent 60%);
+}
+
+.route-map {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  opacity: 0.12;
+}
+
+.route-info {
+  position: relative;
+  z-index: 1;
+}
+
+.route-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--gold-lt);
+  letter-spacing: 0.1em;
+}
+
+.route-sub {
+  font-size: 0.82rem;
+  color: rgba(240, 232, 213, 0.55);
+  margin-top: 4px;
+}
+
+
+/* ── 11. ABOUT SECTION ── */
+.about-section {
+  background: linear-gradient(135deg, #0d1b2a 0%, #0f2035 100%);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Timeline */
+.timeline {
+  margin-top: 40px;
+}
+
+.tl-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+/* Vertical connector line */
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 44px;
+  width: 1px;
+  height: calc(100% + 10px);
+  background: rgba(201, 148, 58, 0.2);
+}
+
+.tl-item:last-child::before {
+  display: none;
+}
+
+.tl-dot {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--gold);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--gold);
+  background: var(--deep);
+  margin-top: 2px;
+}
+
+.tl-year {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+}
+
+.tl-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--cream);
+  margin: 4px 0;
+}
+
+.tl-desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(240, 232, 213, 0.58);
+}
+
+/* Skills grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.skill-tag {
+  padding: 12px 18px;
+  border: 1px solid rgba(201, 148, 58, 0.25);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(240, 232, 213, 0.7);
+  text-align: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.skill-tag:hover {
+  border-color: var(--gold);
+  color: var(--gold-lt);
+}
+
+
+/* ── 12. CONTACT SECTION ── */
+.contact-section {
+  background: var(--navy);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.8;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: rgba(240, 232, 213, 0.04);
+  border: 1px solid rgba(201, 148, 58, 0.25);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: rgba(201, 148, 58, 0.65);
+}
+
+.form-group select option {
+  background: var(--navy);
+}
+
+.form-group textarea {
+  min-height: 120px;
+}
+
+/* Contact info panel */
+.contact-info {
+  padding-top: 10px;
+}
+
+.info-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.info-icon {
+  font-size: 1.4rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.info-val {
+  font-size: 0.97rem;
+  color: rgba(240, 232, 213, 0.78);
+  line-height: 1.6;
+}
+
+
+/* ── 13. FOOTER ── */
+footer {
+  background: var(--deep);
+  border-top: 1px solid rgba(201, 148, 58, 0.15);
+  padding: 48px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--gold);
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: rgba(240, 232, 213, 0.38);
+  font-family: var(--font-heading);
+  letter-spacing: 0.12em;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 18px;
+}
+
+.footer-socials a {
+  font-size: 1.1rem;
+  color: rgba(201, 148, 58, 0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-socials a:hover {
+  color: var(--gold);
+}
+
+
+/* ── 14. SCROLL REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ── 15. RESPONSIVE / MEDIA QUERIES ── */
+@media (max-width: 900px) {
+  .services-grid,
+  .routes-grid,
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-art {
+    opacity: 0.22;
+    max-width: 100%;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
